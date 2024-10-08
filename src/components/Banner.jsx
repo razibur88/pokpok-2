@@ -45,22 +45,22 @@ const Banner = () => {
       <Slider {...settings}>
         <div className="">
           <Link to="/shop">
-            <img src={BanImg} alt="" />
+            <img className="w-full" src={BanImg} alt="" />
           </Link>
         </div>
         <div className="">
           <Link to="/shop">
-            <img src={BanImg} alt="" />
+            <img className="w-full" src={BanImg} alt="" />
           </Link>
         </div>
         <div className="">
           <Link to="/shop">
-            <img src={BanImg} alt="" />
+            <img className="w-full" src={BanImg} alt="" />
           </Link>
         </div>
         <div className="">
           <Link to="/shop">
-            <img src={BanImg} alt="" />
+            <img className="w-full" src={BanImg} alt="" />
           </Link>
         </div>
       </Slider>

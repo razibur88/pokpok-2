@@ -6,12 +6,16 @@ import { ImSearch } from "react-icons/im";
 import { FaUser } from "react-icons/fa6";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { IoCart } from "react-icons/io5";
+import { RxCross2 } from "react-icons/rx";
+import CartImg from "../assets/cartImg.jpeg";
 
 const Navbar = () => {
   let cateRef = useRef();
   let accRef = useRef();
+  let cartRef = useRef();
   let [isCateNav, setisCateNav] = useState(false);
   let [isAcc, setisAcc] = useState(false);
+  let [isCart, setIsCart] = useState(false);
 
   useEffect(() => {
     document.addEventListener("click", (e) => {
@@ -25,8 +29,13 @@ const Navbar = () => {
       } else {
         setisAcc(false);
       }
+      if (cartRef.current.contains(e.target)) {
+        setIsCart(!isCart);
+      } else {
+        setIsCart(false);
+      }
     });
-  }, [isCateNav]);
+  }, [isCateNav, isAcc, isCart]);
 
   return (
     <section className="bg-[#F5F5F3] py-[25px]">
@@ -74,11 +83,13 @@ const Navbar = () => {
           </div>
           <div className="w-1/4">
             <div className="flex justify-end gap-x-6 relative">
-              <div ref={accRef} className="flex items-center">
+              <div ref={accRef} className="flex items-center cursor-pointer">
                 <FaUser />
                 <IoMdArrowDropdown />
               </div>
-              <IoCart />
+              <div className="cursor-pointer" ref={cartRef}>
+                <IoCart />
+              </div>
               {isAcc && (
                 <div className="bg-[#262626] w-[200px] absolute left-[138px] top-[60px] z-[1]">
                   <ul className="py-3">
@@ -89,6 +100,44 @@ const Navbar = () => {
                       LogOut
                     </li>
                   </ul>
+                </div>
+              )}
+              {isCart && (
+                <div className="absolute right-0 top-full mt-2 w-full md:w-[360px] bg-[rgba(233,230,230,0.9)] z-[1]">
+                  <div className="flex bg-white py-4 px-5">
+                    <div>
+                      <img
+                        className="w-[80px] md:w-[150px]"
+                        src={CartImg}
+                        alt="Cart item"
+                      />
+                    </div>
+                    <div className="flex-grow">
+                      <div className="font-DM font-bold text-[14px] ml-3">
+                        <h3>Black Smart Watch</h3>
+                      </div>
+                      <div className="font-DM font-bold text-[14px] ml-3">
+                        <h3>$44.00</h3>
+                      </div>
+                    </div>
+                    <div className="ms-auto text-[20px]">
+                      <RxCross2 />
+                    </div>
+                  </div>
+                  <div className="bg-white py-4 px-5">
+                    <h5 className="text-[rgba(166,162,162,0.9)]">
+                      Subtotal:{" "}
+                      <span className="text-black font-bold">$44.00</span>
+                    </h5>
+                    <div className="flex flex-wrap md:flex-nowrap my-5">
+                      <button className="px-[20px] md:px-[40px] py-[12px] md:py-[16px] text-[10px] md:text-[12px] font-bold border-2 border-[#000] me-3 hover:bg-black hover:text-white duration-300">
+                        View Cart
+                      </button>
+                      <button className="px-[20px] md:px-[40px] py-[12px] md:py-[16px] text-[10px] md:text-[12px] font-bold border-2 border-[#000] me-3 hover:bg-black hover:text-white duration-300">
+                        Check Out
+                      </button>
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
