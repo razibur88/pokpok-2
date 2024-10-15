@@ -1,11 +1,32 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Container from "../components/Container";
 import { FaPlus, FaMinus } from "react-icons/fa6";
-
 import Post from "../components/Post";
+import { ApiData } from "../components/ContextApi";
+import Pagination from "../components/Pagination";
 
 const Shop = () => {
+  let {info, loading} = useContext(ApiData)
   let [show, setShow] = useState(false);
+  let [currentPage, setCurrentPage] = useState(1)
+  let [perPage, setPerPage] = useState(6)
+
+  let lastPage = currentPage * perPage
+  let firstPage = lastPage - perPage
+  let allPage = info.slice(firstPage, lastPage)
+
+  let pageNumber = []
+
+  for(let i = 0; i < Math.ceil(info.length / perPage); i++){
+    pageNumber.push(i)
+  }
+
+  console.log(pageNumber);
+  
+  
+  
+
+
   return (
     <section>
       <Container>
@@ -68,7 +89,10 @@ const Shop = () => {
             </div>
 
             <div className="flex justify-between flex-wrap">
-              <Post />
+              <Post allPage={allPage} />
+              <div className="py-10 flex justify-center w-full">
+              <Pagination pageNumber={pageNumber}/>
+              </div>
             </div>
           </div>
         </div>

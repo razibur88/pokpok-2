@@ -6,12 +6,13 @@ import { FaCartPlus } from "react-icons/fa";
 import { ApiData } from "./ContextApi";
 import { Link } from "react-router-dom";
 
-const Post = () => {
+const Post = ({allPage}) => {
   let { info, loading } = useContext(ApiData);
+  
 
   return (
     <>
-      {info.map((item) => (
+      {allPage.map((item) => (
         <div className="w-[32%]">
           <div className="">
             <div className="relative group overflow-hidden">
