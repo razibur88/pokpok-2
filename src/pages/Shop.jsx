@@ -14,6 +14,9 @@ const Shop = () => {
   let [perPage, setPerPage] = useState(6);
   let [activeGrid, setActiveGrid] = useState("");
   let [category, setCategory] = useState([]);
+  let [low, setLow] = useState("")
+  let [high, setHigh] = useState("")
+  let [priceShow, setPriceShow] = useState([])
   let [categoryFilter, setCategoryFilter] = useState([]);
   let lastPage = currentPage * perPage;
   let firstPage = lastPage - perPage;
@@ -62,6 +65,22 @@ const Shop = () => {
     setPerPage(e.target.value);
   };
 
+  let handleAll = () =>{
+    setCategoryFilter("")
+  }
+
+
+    let handlePrice = (value) =>{
+      setLow(value.low);
+      setHigh(value.high);
+      let priceRange = info.filter((item)=> item.price > value.low && item.price < value.high)
+      setPriceShow(priceRange);
+      
+    }
+
+  
+  
+
   return (
     <section>
       <Container>
@@ -80,6 +99,11 @@ const Shop = () => {
               </div>
               {show && (
                 <ul>
+                <li onClick={handleAll}
+                      className="capitalize text-[#262626] font-sans py-1"
+                    >
+                     All Product
+                    </li>
                   {category.map((item) => (
                     <li
                       onClick={() => handleCategory(item)}
@@ -90,6 +114,13 @@ const Shop = () => {
                   ))}
                 </ul>
               )}
+            </div>
+            <div className="">
+              <h2 className="text-[#262626] font-bold text-[20px] font-sans mt-10">Show Price</h2>
+              <ul>
+                <li onClick={()=>handlePrice({low:0, high:10})}>$0 - $09</li>
+                <li onClick={()=>handlePrice({low:10, high:19})}>$10 - $19</li>
+              </ul>
             </div>
           </div>
           <div className="w-4/5 pt-8">
@@ -148,6 +179,7 @@ const Shop = () => {
                 allPage={allPage}
                 activeGrid={activeGrid}
                 categoryFilter={categoryFilter}
+                priceShow={priceShow}
               />
               <div className="py-10 flex justify-center w-full">
                 <Pagination

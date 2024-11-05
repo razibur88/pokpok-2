@@ -28,10 +28,11 @@ const Header = () => {
                 <Link to="/shop">Shop</Link>
               </li>
               <li className="font-sans text-[16px] font-normal duration-300 ease-in-out text-[#767676] hover:text-[#262626] hover:font-bold text-center py-2">
-                About
+                <Link to="/about">About</Link>
               </li>
               <li className="font-sans text-[16px] font-normal duration-300 ease-in-out text-[#767676] hover:text-[#262626] hover:font-bold text-center py-2">
-                Contacts
+              <Link to="/contact">Contacts</Link>
+                
               </li>
               <li className="font-sans text-[16px] font-normal duration-300 ease-in-out text-[#767676] hover:text-[#262626] hover:font-bold text-center py-2">
                 Journal
