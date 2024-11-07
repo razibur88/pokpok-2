@@ -74,8 +74,11 @@ const Shop = () => {
       setLow(value.low);
       setHigh(value.high);
       let priceRange = info.filter((item)=> item.price > value.low && item.price < value.high)
-      setPriceShow(priceRange);
-      
+      if(priceRange.length > 0){
+        setCategoryFilter(priceRange);
+      }else{
+        setCategoryFilter("")
+      }
     }
 
   
